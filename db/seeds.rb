@@ -5,14 +5,14 @@ User.destroy_all
 puts "Done deleting"
 
 gracy = User.create!(
-    name: "Gracy Kantzabedian",
+    #name: "Gracy Kantzabedian",
     email: "gracykantzabedian@gmail.com",
     password: "123456"
     )
     photo = Image.create!(user: gracy, remote_photo_url: "https://i.imgur.com/KXSQEfC.jpg")
 
 shalini = User.create!(
-    name: "Shalini Verma",
+    #name: "Shalini Verma",
     email: "shaliniverma@gmail.com",
     password: "123456"
     )
@@ -20,7 +20,7 @@ shalini = User.create!(
     photo = Image.create!(user: shalini, remote_photo_url: "https://i.imgur.com/gheZcFH.jpg")
 
 ludvig = User.create!(
-    name: "Ludvig Londos",
+    #name: "Ludvig Londos",
     email: "ludviglondos@gmail.com",
     password: "123456"
     )
