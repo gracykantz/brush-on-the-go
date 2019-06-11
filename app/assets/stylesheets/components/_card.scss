@@ -1,0 +1,38 @@
+.toothbrush-card {
+  width: 380px;
+  height: 47vh;
+  margin-top: 15px !important;
+  padding-top: 0;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  line-height: 2px;
+  background-color: rgba(230, 230, 230, 0.2);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  p {
+    font-family: 'Quicksand', sans-serif;
+  }
+  h6 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  .background-toothbrush {
+    height: 300px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+}
+
+.card-wrapper {
+  width: 100%;
+
+}
