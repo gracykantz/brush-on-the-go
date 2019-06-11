@@ -18,8 +18,12 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+
+    @images = Image.find_by_product_id(params[:id])
+
     @reviews = Review.where("product_id = ?", params[:id])
     @review = @product.reviews.build
+
   end
 
   # GET /products/new
