@@ -1,26 +1,33 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.create(name: 'Luke', movie: movies.first)
+
 gracy = User.create(
     name: "Gracy Kantzabedian",
     email: "gracykantzabedian@gmail.com",
     password: "123456"
     )
-    photo = Photo.create(user: user, remote_photo_url: "https://i.imgur.com/KXSQEfC.jpg")
-
+    photo = Image.create(user: gracy, remote_photo_url: "https://i.imgur.com/KXSQEfC.jpg")
 
 shalini = User.create(
     name: "Shalini Verma",
     email: "shaliniverma@gmail.com",
     password: "123456"
     )
-    photo = Photo.create(user: user, remote_photo_url: "https://i.imgur.com/gheZcFH.jpg")
 
+    photo = Image.create(user: shalini, remote_photo_url: "https://i.imgur.com/gheZcFH.jpg")
 
 ludvig = User.create(
     name: "Ludvig Londos",
     email: "ludviglondos@gmail.com",
     password: "123456"
     )
-    photo = Photo.create(user: user, remote_photo_url: "https://i.imgur.com/uUgORdr.jpg")
 
+    photo = Image.create(user: ludvig, remote_photo_url: "https://i.imgur.com/uUgORdr.jpg")
 
 
 product = Product.create(
@@ -31,8 +38,7 @@ product = Product.create(
   rating: 3,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://www.shared.com/content/images/2018/06/Tooth-brush-sink-2.jpg")
-
+  photo = Image.create(product: product, remote_photo_url: "https://www.shared.com/content/images/2018/06/Tooth-brush-sink-2.jpg")
 
 
 product = Product.create(
@@ -43,7 +49,7 @@ product = Product.create(
   rating: 5,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://mondrian.mashable.com/uploads%252Fstory%252Fthumbnail%252F74299%252F6d0c31ab-51f1-4555-968c-365e53541bb0.png%252F950x534.png?signature=ZPltC6D81HOjfQo91L3YJXX43TM=&source=https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com")
+  photo = Image.create(product: product, remote_photo_url: "https://mondrian.mashable.com/uploads%252Fstory%252Fthumbnail%252F74299%252F6d0c31ab-51f1-4555-968c-365e53541bb0.png%252F950x534.png?signature=ZPltC6D81HOjfQo91L3YJXX43TM=&source=https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com")
 
 
 
@@ -55,8 +61,7 @@ product = Product.create(
   rating: 3,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url:"https://hips.hearstapps.com/ame-prod-goodhousekeeping-assets.s3.amazonaws.com/main/embedded/28844/toothbrushestouching.jpg?resize=480:*")
-
+  photo = Image.create(product: product, remote_photo_url:"https://hips.hearstapps.com/ame-prod-goodhousekeeping-assets.s3.amazonaws.com/main/embedded/28844/toothbrushestouching.jpg?resize=480:*")
 
 
 product = Product.create(
@@ -67,9 +72,18 @@ product = Product.create(
   rating: 4,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://a57.foxnews.com/a57.foxnews.com/media2.foxnews.com/thumbnails/i/081114/640/360/931/524/toothbrush_640.jpg?ve=1&tl=1")
+  photo = Image.create(product: product, remote_photo_url: "https://a57.foxnews.com/a57.foxnews.com/media2.foxnews.com/thumbnails/i/081114/640/360/931/524/toothbrush_640.jpg?ve=1&tl=1")
 
 
+product = Product.create(
+ user: gracy,
+ title: "Toothbrush with Toothpaste",
+ description: "I know if you forgot your toothbrush you probably also forgot your toothpaste! Take this opportunity to borrow both a toothbrush and a tube of toothpaste so you can make sure your teeth are fresh and clean! Beware, the toothpaste contains nuts, if you have any allergies at all, please don't use this toothpaste.",
+ price: 450,
+ rating: 3,
+ location: "Helsingborg"
+ )
+ photo = Image.create(product: product, remote_photo_url: "https://lovelace-media.imgix.net/getty/75463653.jpg")
 
 product = Product.create(
   user: gracy,
@@ -91,8 +105,8 @@ product = Product.create(
   rating: 5,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://images2.minutemediacdn.com/image/upload/c_crop,h_2136,w_3798,x_0,y_0/f_auto,q_auto,w_1100/v1554917006/shape/mentalfloss/56671-istock-186861121.jpg")
 
+  photo = Image.create(product: product, remote_photo_url: "https://images2.minutemediacdn.com/image/upload/c_crop,h_2136,w_3798,x_0,y_0/f_auto,q_auto,w_1100/v1554917006/shape/mentalfloss/56671-istock-186861121.jpg")
 
 
 product = Product.create(
@@ -103,9 +117,7 @@ product = Product.create(
   rating: 3,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://upload.wikimedia.org/wikipedia/commons/4/49/Toothpasteonbrush.jpg")
-
-
+  photo = Image.create(product: product, remote_photo_url: "https://upload.wikimedia.org/wikipedia/commons/4/49/Toothpasteonbrush.jpg")
 
 product = Product.create(
   user: gracy,
@@ -115,7 +127,8 @@ product = Product.create(
   rating: 4,
   location: "Helsingborg"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://img.huffingtonpost.com/asset/5c9a891d2300006001ea015d.jpeg?ops=scalefit_720_noupscale")
+  photo = Image.create(product: product, remote_photo_url: "https://img.huffingtonpost.com/asset/5c9a891d2300006001ea015d.jpeg?ops=scalefit_720_noupscale")
+
 
 product = Product.create(
   user: ludvig,
@@ -125,9 +138,7 @@ product = Product.create(
   rating: 1,
   location: "Lund"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://i.dailymail.co.uk/i/pix/2014/02/19/article-2562688-1BA02DD800000578-240_634x849.jpg")
-
-
+  photo = Image.create(product: product, remote_photo_url: "https://i.dailymail.co.uk/i/pix/2014/02/19/article-2562688-1BA02DD800000578-240_634x849.jpg")
 
 product = Product.create(
   user: ludvig,
@@ -137,7 +148,9 @@ product = Product.create(
   rating: 2,
   location: "Lund"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://trashbackwards.files.wordpress.com/2012/03/jarobrushes.jpg")
+
+  photo = Image.create(product: product, remote_photo_url: "https://trashbackwards.files.wordpress.com/2012/03/jarobrushes.jpg")
+
 
 product = Product.create(
   user: ludvig,
@@ -147,9 +160,8 @@ product = Product.create(
   rating: 1,
   location: "Lund"
   )
-  Photo.create(product: product, remote_photo_url: "https://media.istockphoto.com/photos/old-toothbrush-picture-id655772538?k=6&m=655772538&s=612x612&w=0&h=RU3O8AeTS_EHooWeakx-uum7l5ZfFQh07JDI_XC-nxI=")
 
-
+ photo = Image.create(product: product, remote_photo_url: "https://media.istockphoto.com/photos/old-toothbrush-picture-id655772538?k=6&m=655772538&s=612x612&w=0&h=RU3O8AeTS_EHooWeakx-uum7l5ZfFQh07JDI_XC-nxI=")
 
 product = Product.create(
   user: ludvig,
@@ -159,8 +171,8 @@ product = Product.create(
   rating: 2,
   location: "Lund"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://reviewed-com-res.cloudinary.com/image/fetch/s--tj7qlrjy--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_642/https://reviewed-production.s3.amazonaws.com/attachment/ed8999ec3f154a69/How-Often-Should-I-Replace-Toothbrush.jpg")
 
+  photo = Image.create(product: product, remote_photo_url: "https://reviewed-com-res.cloudinary.com/image/fetch/s--tj7qlrjy--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,q_auto,w_642/https://reviewed-production.s3.amazonaws.com/attachment/ed8999ec3f154a69/How-Often-Should-I-Replace-Toothbrush.jpg")
 
 
 product = Product.create(
@@ -171,7 +183,7 @@ product = Product.create(
   rating: 1,
   location: "Lund"
   )
-  photo = Photo.create(product: product, remote_photo_url: "http://www.wideearthmedia.com/physician-dentist/blog/wp-content/uploads/2014/06/Dirty-Toothbrush.jpg")
+  photo = Image.create(product: product, remote_photo_url: "http://www.wideearthmedia.com/physician-dentist/blog/wp-content/uploads/2014/06/Dirty-Toothbrush.jpg")
 
 
 
@@ -183,7 +195,8 @@ product = Product.create(
   rating: 1,
   location: "Lund"
   )
-  photo = Photo.create(product: product, remote_photo_url: "http://www.marinkanyc.com/wp-content/uploads/2010/10/toothbrush.jpg")
+
+  photo = Image.create(product: product, remote_photo_url: "http://www.marinkanyc.com/wp-content/uploads/2010/10/toothbrush.jpg")
 
 
 product = Product.create(
@@ -194,9 +207,8 @@ product = Product.create(
   rating: 4,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url:"https://static1.squarespace.com/static/5a7b5e56268b965f425bd123/t/5b41f265575d1f7f898b2429/1531048597808/bogobrushinhand.jpg?format=500w")
 
-
+  photo = Image.create(product: product, remote_photo_url:"https://static1.squarespace.com/static/5a7b5e56268b965f425bd123/t/5b41f265575d1f7f898b2429/1531048597808/bogobrushinhand.jpg?format=500w")
 
 product = Product.create(
   user: shalini,
@@ -206,8 +218,8 @@ product = Product.create(
   rating: 4,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://static1.squarespace.com/static/55df2b76e4b0b190f6db7eee/5636903ee4b03f82085c21a0/5b687ff303ce649b2d3da9a2/1537101671554/00100dPORTRAIT_00100_BURST20180806090029834_COVER.jpg?format=500w")
 
+  photo = Image.create(product: product, remote_photo_url: "https://static1.squarespace.com/static/55df2b76e4b0b190f6db7eee/5636903ee4b03f82085c21a0/5b687ff303ce649b2d3da9a2/1537101671554/00100dPORTRAIT_00100_BURST20180806090029834_COVER.jpg?format=500w")
 
 
 product = Product.create(
@@ -218,7 +230,7 @@ product = Product.create(
   rating: 4,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://static1.squarespace.com/static/51446b7fe4b033f380361f23/5358fecce4b0859258eae1f8/52bbb451e4b0911754512975/1388033107560/524-003-750-1.jpg?format=500w")
+  photo = Image.create(product: product, remote_photo_url: "https://static1.squarespace.com/static/51446b7fe4b033f380361f23/5358fecce4b0859258eae1f8/52bbb451e4b0911754512975/1388033107560/524-003-750-1.jpg?format=500w")
 
 
 
@@ -230,8 +242,8 @@ product = Product.create(
   rating: 5,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url:"https://ae01.alicdn.com/kf/HTB1bxpLQXXXXXcXaXXXq6xXFXXXx/4Pcs-Bamboo-Charcoal-Toothbrush-Oral-Dental-Care-Soft-Nano-Teeth-Brush-Set-Dental-Care-Soft-Charcoal.jpg_640x640.jpg")
 
+  photo =Image.create(product: product, remote_photo_url:"https://ae01.alicdn.com/kf/HTB1bxpLQXXXXXcXaXXXq6xXFXXXx/4Pcs-Bamboo-Charcoal-Toothbrush-Oral-Dental-Care-Soft-Nano-Teeth-Brush-Set-Dental-Care-Soft-Charcoal.jpg_640x640.jpg")
 
 
 product = Product.create(
@@ -242,8 +254,8 @@ product = Product.create(
   rating: 4,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://images-na.ssl-images-amazon.com/images/I/41NNRl6XXhL.jpg")
 
+  photo = Image.create(product: product, remote_photo_url: "https://images-na.ssl-images-amazon.com/images/I/41NNRl6XXhL.jpg")
 
 
 product = Product.create(
@@ -254,9 +266,8 @@ product = Product.create(
   rating: 4,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://www.picclickimg.com/00/s/MTAwMFgxMDAw/z/yngAAOSw24RbKJOU/$_3.JPG")
 
-
+  photo = Image.create(product: product, remote_photo_url: "https://www.picclickimg.com/00/s/MTAwMFgxMDAw/z/yngAAOSw24RbKJOU/$_3.JPG")
 
 product = Product.create(
   user: shalini,
@@ -266,9 +277,7 @@ product = Product.create(
   rating: 5,
   location: "Malmö"
   )
-  photo = Photo.create(product: product, remote_photo_url: "https://image.made-in-china.com/202f0j00CgmUNWaGblqb/100-Biodegradable-Bamboo-Charcoal-Toothbrush-for-Adult-Household.jpg")
 
+  photo = Image.create(product: product, remote_photo_url: "https://image.made-in-china.com/202f0j00CgmUNWaGblqb/100-Biodegradable-Bamboo-Charcoal-Toothbrush-for-Adult-Household.jpg")
 
 puts "Seed is done!"
-
-

@@ -5,6 +5,15 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @images = Image.all
+
+    @products_mark = Product.where.not(latitude: nil, longitude: nil)
+    @markers = @products_mark.map do |product|
+      {
+        lat: product.latitude,
+        lng: product.longitude
+      }
+    end
   end
 
   # GET /products/1
@@ -69,6 +78,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :price, :rating, :location)
+      params.require(:product).permit(:name, :description, :price, :rating, :location, :latitude, :longitude)
     end
-end
+  end
