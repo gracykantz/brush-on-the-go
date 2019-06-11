@@ -24,4 +24,25 @@
   <%= @product.location %>
 </p>
 
+
+<h4>Reviews</h4>
+    Your rating:
+    <%= simple_form_for @review do |f| %>
+      <%= f.input :product_id, as: :hidden %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
+      <%= f.submit "Send your review" %>
+    <% end %>
+  <br>
+  <% @reviews.each do |review| %>
+    review by <strong><%= review.user.name %></strong>. rating: <% review.rating.times do %>
+      <i class="fas fa-star" style="color: goldenrod;"></i>
+    <% end %>
+    <br>
+    <%= review.content %><br>
+<br>
+  <% end %>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+
 <%= link_to 'Back', products_path %>
