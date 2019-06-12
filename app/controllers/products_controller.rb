@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     prod_marks = @products_mark
     # Code addition for Product Filters- Added By Shalini
     if params[:query].present?
-      sql_query = "title ILIKE :query OR description ILIKE :query"
+      sql_query = "title ILIKE :query OR description ILIKE :query OR location ILIKE :query"
       @products = Product.where(sql_query, query: "%#{params[:query]}%") # {}"title ILIKE ?", "%#{params[:query]}%")
       prod_marks = @products
       # filtermarkproducts(@products_mark, @products)
@@ -40,6 +40,8 @@ class ProductsController < ApplicationController
     @booking = Booking.find_by_product_id(params[:id])
     @images = Image.find_by_product_id(params[:id])
     @reviews = Review.where("product_id = ?", params[:id])
+    @products_mark = Product.where("id = ?", params[:id]).where.not(latitude: nil, longitude: nil)
+    create_markers(@products_mark)
     @rating = 0
     stars = 0
     @rating = 0
