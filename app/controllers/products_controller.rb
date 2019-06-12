@@ -21,7 +21,9 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @booking = Booking.find_by_product_id(params[:id])
-    @image = Image.find_by_product_id(params[:id])
+    @images = Image.find_by_product_id(params[:id])
+    @reviews = Review.where("product_id = ?", params[:id])
+    @review = @product.reviews.build
   end
 
   # GET /products/new
@@ -36,8 +38,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
+    @product = Product.find(params[:id])
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -72,10 +73,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to products_url
   end
 
   private
@@ -87,5 +85,8 @@ class ProductsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
     params.require(:product).permit(:name, :description, :price, :location, :latitude, :longitude)
+
+  def review_params
+    params.require(:review).permit(:content, :rating, :product_id)
   end
 end

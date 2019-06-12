@@ -7,25 +7,24 @@ puts "Done deleting"
 gracy = User.create!(
     name: "Gracy Kantzabedian",
     email: "gracykantzabedian@gmail.com",
-    password: "123456"
+    password: "123456",
+    remote_photo_url: "https://i.imgur.com/KXSQEfC.jpg"
     )
-    photo = Image.create!(user: gracy, remote_photo_url: "https://i.imgur.com/KXSQEfC.jpg")
 
 shalini = User.create!(
     name: "Shalini Verma",
     email: "shaliniverma@gmail.com",
-    password: "123456"
+    password: "123456",
+  remote_photo_url: "https://i.imgur.com/gheZcFH.jpg"
     )
 
-    photo = Image.create!(user: shalini, remote_photo_url: "https://i.imgur.com/gheZcFH.jpg")
 
 ludvig = User.create!(
     name: "Ludvig Londos",
     email: "ludviglondos@gmail.com",
-    password: "123456"
+    password: "123456",
+    remote_photo_url: "https://i.imgur.com/uUgORdr.jpg"
     )
-
-    photo = Image.create!(user: ludvig, remote_photo_url: "https://i.imgur.com/uUgORdr.jpg")
 
 
 product = gracy.products.create!(

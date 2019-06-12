@@ -1,59 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-  <div class="row">
-    <%= cl_image_tag @image.photo, height: 300, width: 400, crop: :fill  %>
-  </div>
-  <div class="row">
-    <div class="col">
-      <br><br><strong>Title:</strong>
-      <%= @product.title %>
-    </div>
-    <div class="col">
-      <br><br><strong>Rating:</strong>
-      <%= @product.rating %>
-    </div>
-  </div><br>
-  <div class="row">
-    <strong>Description:</strong>
-    <%= @product.description %>
-  </div><br>
-  <div class="row">
-    <div class="col">
-      <strong>Price:</strong>
-      <%= @product.price %>
-    </div>
-    <div class="col">
-      <strong>Location:</strong>
-      <%= @product.location %>
-    </div>
-  </div><br>
-<!--   <% if !@booking.nil? %>
-<div class="row">
-  <strong>Booking Details:</strong>
-</div>
-<div class="row">
-  <strong>Amount paid for the booking in SEK:</strong>
-  <%= @booking.amount %>
-</div>
-<div class="row">
-  <div class="col">
-    <br><strong>Booking Start Date:</strong>
-    <%= @booking.fromdate %>
-  </div>
-  <div class="col">
-    <br><strong>Booking End Date:</strong>
-    <%= @booking.todate %>
-  </div>
-</div>
-<% end %> -->
-<% if @booking.nil? %>
-<strong>No bookings made yet for this product</strong><br><br>
-<%= link_to 'Book now', new_product_booking_path(@product.id), class: 'btn btn-secondary' %><br><br>
-<% end %><br><br>
-<% if !@booking.nil? %>
-<%= link_to "Show booking", product_booking_path(@product.id, @booking.id), class: 'btn btn-secondary'  %><br><br>
-<% end %>
-  <%= link_to 'Back to Product Listing', products_path, class: 'btn btn-secondary'  %>
-</div>
+<%= cl_image_tag @images.photo, height: 300, width: 400, crop: :fill  %>
+ <h6><%= @product.title %></h6>
 
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @product.rating %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @product.location %>
+</p>
+
+
+<h4>Reviews</h4>
+    Your rating:
+    <%= simple_form_for @review do |f| %>
+      <%= f.input :product_id, as: :hidden %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience" %>
+      <%= f.submit "Send your review" %>
+    <% end %>
+  <br>
+  <% @reviews.each do |review| %>
+    review by <strong><%= review.user.name %></strong>. rating: <% review.rating.times do %>
+      <i class="fas fa-star" style="color: goldenrod;"></i>
+    <% end %>
+    <br>
+    <%= review.content %><br>
+<br>
+  <% end %>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+
+<%= link_to 'Back', products_path %>
