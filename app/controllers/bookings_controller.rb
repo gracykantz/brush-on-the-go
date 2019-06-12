@@ -50,10 +50,10 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:product_id])
-    @bookings = Booking.where('product_id = ?', params[:product_id])
-    @image = Image.find_by_product_id(@product.id)
+    # @product = Product.find(params[:product_id])
     @user = current_user
+    @bookings = Booking.where('user_id = ?', @user.id)
+    # @image = Image.find_by_product_id(@product.id)
   end
 
   def destroy

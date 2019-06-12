@@ -9,13 +9,29 @@ class ProductsController < ApplicationController
     @images = Image.all
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
-    @markers = @products_mark.map do |product|
-       {
-         lat: product.latitude,
-         lng: product.longitude,
-         infoWindow: render_to_string(partial: "infowindow", locals: { product: product })
-       }
-     end
+    prod_marks = @products_mark
+    # Code addition for Product Filters- Added By Shalini
+    if params[:query].present?
+      sql_query = "title ILIKE :query OR description ILIKE :query OR location ILIKE :query"
+      @products = Product.where(sql_query, query: "%#{params[:query]}%") # {}"title ILIKE ?", "%#{params[:query]}%")
+      prod_marks = @products
+      # filtermarkproducts(@products_mark, @products)
+    else
+      @products = Product.all.order(rating: :desc)
+    end
+    params[:query] = ""
+    # End of Code for Product Filters
+    create_markers(prod_marks)
+  end
+
+  def create_markers(productsmark)
+    @markers = productsmark.map do |product|
+      {
+        lat: product.latitude,
+        lng: product.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { product: product })
+      }
+    end
   end
 
   # GET /products/1
@@ -24,8 +40,11 @@ class ProductsController < ApplicationController
     @booking = Booking.find_by_product_id(params[:id])
     @images = Image.find_by_product_id(params[:id])
     @reviews = Review.where("product_id = ?", params[:id])
+    @products_mark = Product.where("id = ?", params[:id]).where.not(latitude: nil, longitude: nil)
+    create_markers(@products_mark)
     @rating = 0
     stars = 0
+    @rating = 0
     if @reviews.count.positive?
       @reviews.each do |review|
         stars += review.rating
@@ -38,6 +57,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @image = Image.new
   end
 
   # GET /products/1/edit
@@ -47,7 +67,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.find(params[:id])
+    @product = Product.new(product_params)
+    @product.save!
+    @image = Image.new(image_params)
+    @image.product_id = @product.id
+
+    @image.photo = params[:photo]
+
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -93,10 +119,14 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name, :description, :price, :location, :latitude, :longitude)
+    params.require(:product).permit(:name, :description, :price, :location, :photo)
   end
 
   def review_params
     params.require(:review).permit(:content, :rating, :product_id)
+  end
+
+  def image_params
+    params.require(:image).permit(:product_id, :photo)
   end
 end

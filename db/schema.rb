@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_06_11_150129) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,3 +85,4 @@ ActiveRecord::Schema.define(version: 2019_06_11_150129) do
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
 end
+
