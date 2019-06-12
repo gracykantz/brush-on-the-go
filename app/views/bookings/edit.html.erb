@@ -1,0 +1,11 @@
+<h1>Edit Booking</h1>
+<strong>Product:</strong> <%= @booking.product.title %><br><br>
+<% if @image %>
+<%= cl_image_tag @image.photo, height: 300, width: 400, crop: :fill  %><br><br>
+<% else %>
+<%= cl_image_tag @product.images.first.photo, height: 300, width: 400, crop: :fill  %><br><br>
+<% end %>
+<strong>Overview:</strong> <%= @booking.product.description %><br><br>
+<strong>Price/Day:</strong> <%= @booking.product.price %><br><br>
+<%= render 'form', locals: {booking: @booking, product: @booking.product} %>
+<br><%= link_to "Back to Product Listing", products_path, class: 'btn btn-secondary' %>

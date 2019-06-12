@@ -7,13 +7,12 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :price %>
-    Rating: <%= f.select :rating, (1..5) %>
     <%= f.input :location %>
     <%= f.input :latitude %>
     <%= f.input :longitude%>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>
