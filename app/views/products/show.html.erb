@@ -29,15 +29,15 @@
       <div class="review-form">
         <%= simple_form_for @review do |f| %>
           <%= f.input :product_id, as: :hidden %>
-          <%= f.input :content %>
+          <%= f.input :content, as: :text, label: "Write your review" %>
           <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "stars"%>
           <%= f.submit "Submit", class: "btn btn-primary"%>
       <% end %>
       </div>
     <br>
       <% @reviews.each do |review| %>
-    <div class="review-content border pl-2 pt-2">
-      <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %><strong><%= review.user.name %></strong>.
+    <div class="review-content pl-2 pt-2">
+      <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %> <strong><%= review.user.name %></strong>.
       <br>
       <% review.rating.times do %>
       <i class="fas fa-star stars"></i>
