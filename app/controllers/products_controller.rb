@@ -4,9 +4,10 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.all.order(rating: :desc)
+    @booking = Booking.all
     @images = Image.all
-
+    @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
     @markers = @products_mark.map do |product|
       {
@@ -19,6 +20,8 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @booking = Booking.find_by_product_id(params[:id])
+    @image = Image.find_by_product_id(params[:id])
   end
 
   # GET /products/new
@@ -49,8 +52,13 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product = Product.find(params[:id])
+    @booking = Booking.find_by_product_id(params[:id])
+    if !@booking.nil?
+      @product.errors.add(:base, 'Product cannot be modifed since booking already exist')
+    end
     respond_to do |format|
-      if @product.update(product_params)
+      if @product.update(product_params) && @booking.nil?
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -71,13 +79,13 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name, :description, :price, :rating, :location, :latitude, :longitude)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
   end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :location, :latitude, :longitude)
+  end
+end

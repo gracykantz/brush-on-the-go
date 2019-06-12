@@ -32,8 +32,10 @@
       <td><%= product.rating %></td>
       <td><%= product.location %></td>
       <td><%= link_to 'Show', product %></td>
+      <% if @currentuser.id === product.created_by %>
       <td><%= link_to 'Edit', edit_product_path(product) %></td>
-      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      <td><%= link_to 'Book', new_product_booking_path(product.id) %></td>
     </tr>
     <% end %>
   </tbody>

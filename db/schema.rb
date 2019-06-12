@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_010111) do
+ActiveRecord::Schema.define(version: 2019_06_11_194016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.date "fromdate"
+    t.date "todate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount"
+    t.index ["product_id"], name: "index_bookings_on_product_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "images", force: :cascade do |t|
     t.bigint "product_id"
@@ -35,8 +47,8 @@ ActiveRecord::Schema.define(version: 2019_06_11_010111) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_products_on_user_id"
+    t.bigint "created_by"
+    t.index ["created_by"], name: "index_products_on_created_by"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +65,9 @@ ActiveRecord::Schema.define(version: 2019_06_11_010111) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "products"
+  add_foreign_key "bookings", "users"
   add_foreign_key "images", "products"
   add_foreign_key "images", "users"
-  add_foreign_key "products", "users"
+  add_foreign_key "products", "users", column: "created_by"
 end
