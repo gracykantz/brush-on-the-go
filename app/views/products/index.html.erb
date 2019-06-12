@@ -10,6 +10,16 @@ data-markers="<%= @markers.to_json %>"
 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 ></div>
 
+<!-- Add Filters for Products - Added by Shalini -->
+<%= form_tag products_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a Product"
+  %>
+<% end %>
+<!-- End of Filter Addition -->
+
 <% @products.each do |product| %>
   <div class="toothbrush-card">
     <%= link_to product do%>
