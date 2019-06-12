@@ -9,14 +9,17 @@ class ProductsController < ApplicationController
     @images = Image.all
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
-    prod_marks = @product_mark
+    prod_marks = @products_mark
     # Code addition for Product Filters- Added By Shalini
     if params[:query].present?
-      @products = Product.where("title ILIKE ?", "%#{params[:query]}%")
-      prod_marks = filtermarkproducts(@products_mark, @products)
+      sql_query = "title ILIKE :query OR description ILIKE :query"
+      @products = Product.where(sql_query, query: "%#{params[:query]}%") # {}"title ILIKE ?", "%#{params[:query]}%")
+      prod_marks = @products
+      # filtermarkproducts(@products_mark, @products)
     else
       @products = Product.all.order(rating: :desc)
     end
+    params[:query] = ""
     # End of Code for Product Filters
     create_markers(prod_marks)
   end
@@ -28,12 +31,6 @@ class ProductsController < ApplicationController
         lng: product.longitude,
         infoWindow: render_to_string(partial: "infowindow", locals: { product: product })
       }
-    end
-  end
-
-  def filtermarkproducts(markprod)
-    markprod.each do |mark|
-
     end
   end
 
