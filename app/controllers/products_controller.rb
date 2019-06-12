@@ -24,6 +24,14 @@ class ProductsController < ApplicationController
     @booking = Booking.find_by_product_id(params[:id])
     @images = Image.find_by_product_id(params[:id])
     @reviews = Review.where("product_id = ?", params[:id])
+    @rating = 0
+    stars = 0
+    if @reviews.count.positive?
+      @reviews.each do |review|
+        stars += review.rating
+      end
+      @rating = (stars / @reviews.count).round
+    end
     @review = @product.reviews.build
   end
 

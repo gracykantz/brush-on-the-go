@@ -1,0 +1,33 @@
+body {
+  background-color: white;
+}
+
+h5 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
+  color: $success;
+}
+
+.toothbrush-photo {
+  display: block;
+  margin: 0 auto;
+}
+
+.toothbrush-content {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+p  {
+ font-family: 'Quicksand', sans-serif;
+ color: $primary;
+}
+
+.toothbrush-description {
+  font-weight: bold;
+}
+
+.back-button {
+  margin-top: 10px;
+  font-size: 30px;
+}

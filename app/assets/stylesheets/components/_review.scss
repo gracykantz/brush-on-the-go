@@ -1,0 +1,18 @@
+.review-content {
+  margin: 15px 4px 0px 0px;
+}
+
+.review-text {
+  padding-top: 10px;
+}
+
+.stars {
+  color: $danger;
+}
+.br-theme-css-stars .br-widget a.br-selected:after {
+  color: $danger !important;
+ }
+
+.review-form {
+  margin-right: 4px;
+}
