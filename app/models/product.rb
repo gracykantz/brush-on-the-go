@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   has_many :images, dependent: :destroy
   has_many :bookings
   has_many :reviews, dependent: :destroy
-  validates :rating, inclusion: { in: 1..5 }
   validates :price, numericality: { greater_than: 0 }, presence: true, numericality: true
   validates :location, presence: true
   # validates :price, presence: true, numericality: true
