@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
     @reviews = Review.where("product_id = ?", params[:id])
     @rating = 0
     stars = 0
+    @rating = 0
     if @reviews.count.positive?
       @reviews.each do |review|
         stars += review.rating
@@ -54,6 +55,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @image = Image.new
   end
 
   # GET /products/1/edit
@@ -63,7 +65,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.find(params[:id])
+    @product = Product.new(product_params)
+    @product.save!
+    @image = Image.new(image_params)
+    @image.product_id = @product.id
+
+    @image.photo = params[:photo]
+
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -109,10 +117,14 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name, :description, :price, :location, :latitude, :longitude)
+    params.require(:product).permit(:name, :description, :price, :location, :photo)
   end
 
   def review_params
     params.require(:review).permit(:content, :rating, :product_id)
+  end
+
+  def image_params
+    params.require(:image).permit(:product_id, :photo)
   end
 end

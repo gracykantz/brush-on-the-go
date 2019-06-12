@@ -1,14 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
+
+  <% if !@bookings.empty? %>
   <div class="row">
-    <%= cl_image_tag @image.photo, height: 300, width: 400, crop: :fill  %>
-  </div>
-  <div class="row">
-    <div class="col">
-      <br><br><strong>Product:</strong>
-      <%= @product.title %>
-    </div>
+
     <div class="col">
       <br><br><strong>Booked by:</strong>
       <%= @user.name%>
@@ -29,12 +25,20 @@
       <%= booking.amount %>
     </div>
     <div class="col">
-      <br><br><%= link_to "Edit booking", edit_product_booking_path(@product.id, booking.id), class: 'btn btn-secondary' %>
+      <br><br><strong>Product:</strong>
+      <%= booking.product.title %>
     </div>
     <div class="col">
-      <br><br><%= link_to "Cancel booking", product_booking_path(@product, booking), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-secondary' %>
+      <br><br><%= link_to "Edit booking", edit_product_booking_path(booking.product.id, booking.id), class: 'btn btn-secondary' %>
+    </div>
+    <div class="col">
+      <br><br><%= link_to "Cancel booking", product_booking_path(booking.product.id, booking), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-secondary' %>
     </div>
   </div>
+
+  <% end %>
+  <% else %>
+  <h3>There are no bookings</h3>
   <% end %>
   <br><br><%= link_to 'Back to Products listing', products_path, class: 'btn btn-secondary'  %>
 </div>
