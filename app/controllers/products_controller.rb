@@ -10,11 +10,12 @@ class ProductsController < ApplicationController
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
     @markers = @products_mark.map do |product|
-      {
-        lat: product.latitude,
-        lng: product.longitude
-      }
-    end
+       {
+         lat: product.latitude,
+         lng: product.longitude,
+         infoWindow: render_to_string(partial: "infowindow", locals: { product: product })
+       }
+     end
   end
 
   # GET /products/1
