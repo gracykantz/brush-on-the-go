@@ -9,10 +9,27 @@ class ProductsController < ApplicationController
     @images = Image.all
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
-    @markers = @products_mark.map do |product|
+    prod_marks = @products_mark
+    # Code addition for Product Filters- Added By Shalini
+    if params[:query].present?
+      sql_query = "title ILIKE :query OR description ILIKE :query"
+      @products = Product.where(sql_query, query: "%#{params[:query]}%") # {}"title ILIKE ?", "%#{params[:query]}%")
+      prod_marks = @products
+      # filtermarkproducts(@products_mark, @products)
+    else
+      @products = Product.all.order(rating: :desc)
+    end
+    params[:query] = ""
+    # End of Code for Product Filters
+    create_markers(prod_marks)
+  end
+
+  def create_markers(productsmark)
+    @markers = productsmark.map do |product|
       {
         lat: product.latitude,
-        lng: product.longitude
+        lng: product.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { product: product })
       }
     end
   end
@@ -23,10 +40,10 @@ class ProductsController < ApplicationController
     @booking = Booking.find_by_product_id(params[:id])
     @images = Image.find_by_product_id(params[:id])
     @reviews = Review.where("product_id = ?", params[:id])
+    @rating = 0
     stars = 0
     @rating = 0
     if @reviews.count.positive?
-
       @reviews.each do |review|
         stars += review.rating
       end
