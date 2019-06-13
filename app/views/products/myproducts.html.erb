@@ -17,7 +17,9 @@
     <% end %>
   </div>
   <% end %>
-    <br>&nbsp&nbsp<%= link_to "Back", products_path, class: 'btn btn-primary' %>
-  <div>
+  <%= link_to products_path do %>
+    <i class="fas fa-chevron-left back-button"></i>
+  <% end %>
+ <div id="space-for-navbar"></div>
 
 
