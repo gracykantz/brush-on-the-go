@@ -1,0 +1,81 @@
+.new_container {
+  width: 80%;
+  padding-bottom: 80px;
+  margin: 25px 30px;
+}
+
+.prod_container{
+  padding-bottom: 100px;
+}
+
+ h1 {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+.fas {
+  font-size: 20px;
+}
+
+strong {
+  font-family: 'Quicksand', sans-serif;
+  color: $primary;
+  font-weight: bold;
+  text-align: center;
+}
+
+h7{
+  font-family: 'Quicksand', sans-serif;
+  color: $primary;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  padding-left: 80px;
+  margin-bottom: 20px;
+}
+
+.brush-card {
+  position: relative;
+  width: 380px;
+  height: 100%;
+  margin-top: 15px !important;
+  padding-top: 0;
+  padding-bottom: 10px;
+  // text-align: center;
+  display: block;
+  margin: 0 auto;
+  line-height: 2px;
+  background-color: rgba(230, 230, 230, 0.2);
+  box-shadow: 0 0 10px rgba(220, 220, 220, 1);
+  p {
+    font-family: 'Quicksand', sans-serif;
+    color: $primary;
+    font-weight: bold;
+    text-align: center;
+  }
+  h6 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    color: $danger;
+    margin-top: 10px;
+    text-align: center;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  .background-brush {
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  .brush-description {
+    font-family: 'Quicksand', sans-serif;
+    color: $primary;
+    font-weight: bold;
+    line-height: 20px;
+  }
+}
