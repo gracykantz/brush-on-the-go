@@ -39,24 +39,25 @@
     <br>
       <% @reviews.each do |review| %>
     <div class="review-content pl-4 pt-2">
-      <%= cl_image_tag review.user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
-      <% review.rating.times do %>
-      <i class="fas fa-star stars"></i>
-      <% end %>
-      <br>
-      <div class="review-text pt-3">
-        <%= review.content %>
-      <br>
+        <%= cl_image_tag review.user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
+        <% review.rating.times do %>
+        <i class="fas fa-star stars"></i>
+        <% end %>
+        <br>
+        <div class="review-text pt-3">
+          <%= review.content %>
+        <br>
+        <% end %>
+        </div>
+        <br>
       </div>
       <br>
     </div>
-    <br>
-  </div>
   <% end %>
 </div>
 
 <%= link_to products_path do %>
-<i class="fas fa-chevron-left back-button"></i>
+  <i class="fas fa-chevron-left back-button"></i>
 <% end %>
 
 <div id="space-for-navbar"></div>
