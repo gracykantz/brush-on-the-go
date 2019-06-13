@@ -33,6 +33,7 @@
     <% end %>
   </div>
   <br>
+
     <% @reviews.each do |review| %>
     <div class="review-content pl-4 pt-2">
       <%= cl_image_tag review.user.photo, width: 1700, height: 1700,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
