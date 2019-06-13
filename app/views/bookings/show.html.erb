@@ -1,45 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<div class="container">
-
-  <% if !@bookings.empty? %>
-  <div class="row">
-
-    <div class="col">
-      <br><br><strong>Booked by:</strong>
-      <%= @user.name%>
-    </div>
+  <h6 class="primary-title">My Bookings</h6>
+  <div class="pscard">
+    <% if !@bookings.empty? %>
+      <% @bookings.each do |booking| %>
+          <div class="pscontainer">
+            <div>
+              <%= cl_image_tag booking.product.photo, height: 35, width: 35, crop: :fill, class: ""  %>
+            </div>
+            <div class="psdates">
+              <%= booking.fromdate %>&nbsp;&nbsp;-&nbsp;&nbsp;<%= booking.todate %><br>
+              <%= booking.product.location %>
+            </div>
+            <div class="psdates">
+              <%= number_with_delimiter(booking.amount) %>
+              <span style="font-weight: normal;">SEK</span>
+            </div>
+            <div>
+              <%= link_to  product_booking_path(booking.product.id, booking), method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                <i class="far fa-trash-alt pstrashcan"></i>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    <% else %>
+      <div class="nobookings">There are no bookings for you<br>to review at the moment</div>
+    <% end %>
   </div>
-  <% @bookings.each do |booking| %>
-  <div class="row">
-    <div class="col">
-      <br><br><strong>Product:</strong>
-      <%= booking.product.title %>
-    </div>
-    <div class="col">
-      <br><br><strong>Booked from:</strong>
-      <%= booking.fromdate %>
-    </div>
-    <div class="col">
-      <br><br><strong>Booked till:</strong>
-      <%= booking.todate %>
-    </div>
-    <div class="col">
-      <br><br><strong>Booking Amount in SEK:</strong>
-      <%= booking.amount %>
-    </div>
-    <div class="col">
-      <br><br><%= link_to "Edit booking", edit_product_booking_path(booking.product.id, booking.id), class: 'btn btn-secondary' %>
-    </div>
-    <div class="col">
-      <br><br><%= link_to "Cancel booking", product_booking_path(booking.product.id, booking), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-secondary' %>
-    </div>
-  </div>
-
-  <% end %>
-  <% else %>
-  <h3>There are no bookings for you to review at the moment</h3>
-  <% end %>
-  <br><br><%= link_to 'Back to Products listing', products_path, class: 'btn btn-secondary'  %>
-</div>
-
