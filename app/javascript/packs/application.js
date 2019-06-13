@@ -22,3 +22,5 @@ import { initScrolling } from '../plugins/init_scrolling';
 initScrolling();
 
 import "../plugins/flatpickr"
+
+import "../plugins/init_heart.js"
