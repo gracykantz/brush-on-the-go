@@ -2,18 +2,25 @@
 <h2><center>My Toothbrushes listed for Experience : <%= @products.count %></center></h2>
 <div class="toothbrush-content">
   <% @products.each do |product| %>
-    <%= cl_image_tag product.photo, height: 400, width: 380, crop: :fill, class: "toothbrush-photo"  %>
-    <h5><%= product.title %></h5>
-    <p class="toothbrush-description"> <%= product.description %> </p>
-    <p><%= product.price %> SEK per night</p>
-   <% end %>
+  <%= cl_image_tag product.photo, height: 400, width: 380, crop: :fill, class: "toothbrush-photo"  %>
+  <h5><%= product.title %></h5>
+  <p class="toothbrush-description"> <%= product.description %> </p>
+  <p><%= product.price %> SEK per night</p>
+  <%= link_to product_path(product.id), method: :delete, data: { confirm: "Delete #{product.title}?" } do %>
+  <i class="fas fa-trash-alt" aria-hidden="true"></i>
+  Delete Toothbrush
+  <% end %><br>
+  <%= link_to edit_product_path(product.id) do %>
+  <i class="fas fa-edit" aria-hidden="true"></i>&nbspEdit Details
+  <% end %>
+  <% end %>
 
   <h4><center>Products Geographical Overview</center></h4><br>
   <div
-    id="map"
-    data-markers="<%= @markers.to_json %>"
-    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+  id="map"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 <div>
 
   <%= link_to "Back", products_path %>
