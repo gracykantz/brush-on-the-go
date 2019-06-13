@@ -13,7 +13,6 @@ gem 'carrierwave', '~> 1.2'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
-gem 'font-awesome-rails'
 gem 'geocoder'
 gem 'pundit'
 gem 'sassc-rails'
