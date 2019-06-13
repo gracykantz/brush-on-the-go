@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'products/images', to: 'images#new', as: 'images'
   get '/myproducts', to: 'products#myproducts', as: :show_my_products
   devise_for :users
-  root to: 'pages#home'
+  root to: 'products#index'
   resources :products do
     resources :bookings
     # resource :images

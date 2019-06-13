@@ -1,8 +1,15 @@
-<h1>New Booking</h1>
-<strong>Product:</strong> <%= @product.title %><br><br>
-<%= cl_image_tag @product.photo, height: 300, width: 400, crop: :fill  %><br><br>
-<strong>Overview:</strong> <%= @product.description %><br>
-<strong>Price/Day:</strong> <%= @product.price %><br><br>
-<%= render 'form', locals: { booking: @booking, product: @product } %>
-<br><%= link_to "Back to Product Listing", products_path, class: 'btn btn-secondary' %>
+<h1 class="booking-title">Book This Toothbrush</h1>
+<%= cl_image_tag @product.photo, height: 300, width: 400, crop: :fill, class: "booking-toothbrush"  %>
+<div class="bookings-content">
+  <h5><%= @product.title %></h5>
+  <p class="booking-indv-content"><%= @product.description %></p>
 
+  <p class="booking-indv-content"><%= @product.price %> SEK per night</p>
+
+  <%= render 'form', locals: { booking: @booking, product: @product }, class: "booking-indv-content" %>
+  <%= link_to products_path do %>
+  <i class="fas fa-chevron-left back-button"></i>
+<% end %>
+</div>
+
+ <div id="space-for-navbar"></div>
