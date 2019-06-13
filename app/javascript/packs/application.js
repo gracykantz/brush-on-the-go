@@ -14,3 +14,6 @@ import { initMapbox } from '../plugins/init_mapbox';
 
 initMapbox();
 
+import { backgroundCarousel } from '../plugins/init_background_carousel';
+backgroundCarousel();
+
