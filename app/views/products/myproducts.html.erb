@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1><center>My Listings</center></h1>
+<h1 class="booking-title"><center>My Listings</center></h1>
 <div class="prod_container">
   <% @products.each do |product| %>
-  <div class="brush-card">
+  <div id="brush-card" class="toothbrush-card">
     <div class="background-brush" style="background-image: url(<%= cl_image_path product.photo %>)"></div>
     <%#= cl_image_tag image.photo, height: 300, width: 400, crop: :fill  %>
     <h6><%= product.title %></h6>
@@ -10,15 +10,16 @@
     <p><strong><center><%= product.price %> SEK per night</center></strong></p>
     <p class="brush-description"> <%= product.description %> </p>
     <%= link_to product_path(product.id), method: :delete, data: { confirm: "Delete #{product.title}?" } do %>
-    <i class="fas fa-trash-alt" aria-hidden="true"></i>
-    Delete Toothbrush
-    <% end %><br>
+    <i class="fas fa-trash-alt product-icon trash-icon" aria-hidden="true"></i>
+    <% end %>
     <%= link_to edit_product_path(product.id) do %>
-    <i class="fas fa-edit" aria-hidden="true"></i>&nbspEdit Details
+    <i class="fas fa-edit product-icon" aria-hidden="true"></i>
     <% end %>
   </div>
   <% end %>
-    <br>&nbsp&nbsp<%= link_to "Back", products_path, class: 'btn btn-primary' %>
-  <div>
+  <%= link_to products_path do %>
+    <i class="fas fa-chevron-left back-button"></i>
+  <% end %>
+ <div id="space-for-navbar"></div>
 
 
