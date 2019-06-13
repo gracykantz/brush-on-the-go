@@ -38,6 +38,7 @@ product = gracy.products.create!(
   photo = Image.create!(product: product, remote_photo_url: "https://www.shared.com/content/images/2018/06/Tooth-brush-sink-2.jpg")
 
 
+
 product = gracy.products.create!(
   title: "Electric Toothbrush",
   description: "Brushing your teeth is a lot of work. Take the work out of the morning and take care of your teeth at the same time. Borrow this amazing electric toothbrush today! The toothbrush heads are replaced once a month, as per suggestions from professional dentists. So, you know what you're getting is in the best condition.",
@@ -47,6 +48,7 @@ product = gracy.products.create!(
   remote_photo_url: "https://mondrian.mashable.com/uploads%252Fstory%252Fthumbnail%252F74299%252F6d0c31ab-51f1-4555-968c-365e53541bb0.png%252F950x534.png?signature=ZPltC6D81HOjfQo91L3YJXX43TM=&source=https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com"
   )
   photo = Image.create!(product: product, remote_photo_url: "https://mondrian.mashable.com/uploads%252Fstory%252Fthumbnail%252F74299%252F6d0c31ab-51f1-4555-968c-365e53541bb0.png%252F950x534.png?signature=ZPltC6D81HOjfQo91L3YJXX43TM=&source=https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com")
+  photo = Image.create!(product: product, remote_photo_url: "https://www.shavershop.com.au/dw/image/v2/ABCZ_PRD/on/demandware.static/-/Sites-shavershop-master-catalog/default/dw1035ad74/hires/women/ladies-oral-care/ladies-electric-toothbrushes/009484-1.jpg?sw=930&sh=1139&sm=fit")
 
 
 

@@ -26,12 +26,18 @@ data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 
   <% @products.each do |product| %>
   <div class="toothbrush-card">
-    <%= link_to product do%>
     <div class="background-toothbrush" style="background-image: url(<%= cl_image_path product.photo %>)"></div>
+      <h1><i class="far fa-heart heart-icon"></i></h1>
+    </div>
+    <%= link_to product do%>
     <%#= cl_image_tag image.photo, height: 300, width: 400, crop: :fill  %>
     <h6><%= product.title %></h6>
     <p> <%= product.price %>SEK per night</p>
-    <p><%= product.rating %></p>
+    <div>
+    <% product.rating.times do %>
+      <i class="fas fa-star stars"></i>
+    <% end %>
+    </div>
     <br>
   </div>
   <% end %>

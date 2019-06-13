@@ -37,12 +37,17 @@
   <div class="review-content pl-2 pt-2">
     <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %> <strong><%= review.user.name %></strong>.
     <br>
-    <% review.rating.times do %>
-    <i class="fas fa-star stars"></i>
-    <% end %>
-    <br>
-    <div class="review-text">
-      <%= review.content %>
+      <% @reviews.each do |review| %>
+    <div class="review-content pl-4 pt-2">
+      <%= cl_image_tag review.user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
+      <% review.rating.times do %>
+      <i class="fas fa-star stars"></i>
+      <% end %>
+      <br>
+      <div class="review-text pt-3">
+        <%= review.content %>
+      <br>
+      </div>
       <br>
     </div>
     <br>
