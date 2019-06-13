@@ -1,6 +1,9 @@
-<h1>Editing Product</h1>
+  <h1><center>Edit Product</enter></h1>
+   <%= cl_image_tag @product.photo, height: 150, width: 150, crop: :fill, class: "toothbrush-photo"  %>
+   <div class="edit_container">
+    <%= render 'editform', product: @product %>
+  </div>
+  <b><%= link_to 'Show', @product %> |
+    <%= link_to 'Back', show_my_products_path %></b>
 
-<%= render 'form', product: @product %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>

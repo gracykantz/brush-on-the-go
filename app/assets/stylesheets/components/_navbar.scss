@@ -1,5 +1,4 @@
 .navbar-lewagon {
-  justify-content: space-between;
   background: white;
 }
 
@@ -16,6 +15,9 @@
   height: 60px;
 }
 
+.navbar-container {
+  width: 100vw;
+}
 
 #space-for-navbar {
   height: 90px;
@@ -24,9 +26,11 @@
 }
 
 .navbar-icons {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0;
+  align-items: center
 }
 
 .add-product {
@@ -41,3 +45,4 @@
 .logo-div {
   width: 50px;
 }
+

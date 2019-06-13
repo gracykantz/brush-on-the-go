@@ -1,12 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update]
 
-  # GET /products
-  # GET /products.json
+
   def index
     @products = Product.all.order(rating: :desc)
     @booking = Booking.all
-    # @images = Image.all
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
     prod_marks = @products_mark
@@ -30,22 +28,10 @@ class ProductsController < ApplicationController
     @image = Image.new
   end
 
-  # POST /products
-  # POST /products.json
   def create
     @product = Product.new(product_params)
     @product.user_id = current_user.id
     @product.save!
-    # @image = Image.create!(product_id: @product.id, user_id: current_user.id, photo: @product.remote_photo_url)
-    # respond_to do |format|
-    #   if @product.save
-    #     format.html { redirect_to @product, notice: 'Product was successfully created.' }
-    #     format.json { render :show, status: :created, location: @product }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @product.errors, status: :unprocessable_entity }
-    #   end
-    # end
     if @product.save
       redirect_to product_path(@product)
     else
@@ -84,34 +70,41 @@ class ProductsController < ApplicationController
     @review = @product.reviews.build
   end
 
-  # GET /products/1/edit
   def edit
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
+    @booking = Booking.find_by_product_id(params[:id])
+    @product.update(prod_upd_params)
+    redirect_to show_my_products_path
+    # if !@booking.nil?
+    #   @product.errors.add(:base, 'Product cannot be modifed since booking already exist')
+    #   respond_to do |format|
+    #     format.html { render :edit }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
+    # else
+    #   @product.update(prod_upd_params)
+    #   format.html { redirect_to show_my_products_path, notice: 'Product was successfully updated.' }
+    #   format.json { render :show, status: :ok, location: @product }
+    #   end
+    # end
+  end
+
+  def destroy
+    # Product deletion only when no booking Exist - Start of Addition
     @product = Product.find(params[:id])
     @booking = Booking.find_by_product_id(params[:id])
     if !@booking.nil?
-      @product.errors.add(:base, 'Product cannot be modifed since booking already exist')
-    end
-    respond_to do |format|
-      if @product.update(product_params) && @booking.nil?
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
-      else
-        format.html { render :edit }
+      @product.errors.add(:base, 'Bookings exist for the Toothbrush, cannot be purged')
+      respond_to do |format|
+        format.html { redirect_to show_my_products_path, notice: 'Bookings exist for the Toothbrush ,cannot be purged' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
+    else
+      @product.destroy
+      redirect_to show_my_products_url
     end
-  end
-
-  # DELETE /products/1
-  # DELETE /products/1.json
-  def destroy
-    @product.destroy
-    redirect_to products_url
+    # End of Addition
   end
 
   def myproducts
@@ -122,6 +115,7 @@ class ProductsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Product.find(params[:id])
@@ -129,7 +123,11 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:title, :description, :price, :location, :photo, user_id: current_user.id)
+    params.require(:product).permit(:title, :description, :rating, :price, :location, :photo, user_id: current_user.id)
+  end
+
+  def prod_upd_params
+    params.require(:product).permit(:description, :photo)
   end
 
   def review_params
