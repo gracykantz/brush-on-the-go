@@ -1,0 +1,22 @@
+<%= simple_form_for(@product) do |f| %>
+<%= f.error_notification %>
+<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+<div class="form-inputs m-0">
+  <%= f.input :title, readonly: true, :input_html => {:style => 'width: 300px', 'data-content'=> "Popover content"}, wrapper_html: { class: 'title' } %>
+  <%= f.input :price, readonly: true, :input_html => {:style => 'width: 300px', 'data-content'=> "Popover content"} %>
+  <%= f.input :location, readonly: true, :input_html => {:style => 'width: 300px', 'data-content'=> "Popover content"} %>
+  <!-- Rating Addition for Product Creation -->
+  <%= f.input :rating, readonly: true, :input_html => {:style => 'width: 300px', 'data-content'=> "Popover content"} %>
+  <%= f.input :description, :input_html => {:style => 'width: 300px'} %>
+  <!-- End of Addition -->
+  <%= f.input :photo %>
+</div>
+<div class="form-actions">
+  <%= f.button :submit, class: "btn btn-primary" %>
+</div>
+<% end %>
+
+
+
+
