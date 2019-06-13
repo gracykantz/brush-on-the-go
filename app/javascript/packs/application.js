@@ -18,3 +18,5 @@ initMapbox();
 import { backgroundCarousel } from '../plugins/init_background_carousel';
 backgroundCarousel();
 
+import { initScrolling } from '../plugins/init_scrolling';
+initScrolling();
