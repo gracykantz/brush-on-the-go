@@ -20,3 +20,5 @@ backgroundCarousel();
 
 import { initScrolling } from '../plugins/init_scrolling';
 initScrolling();
+
+import "../plugins/flatpickr"

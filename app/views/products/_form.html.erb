@@ -2,7 +2,7 @@
 <%= f.error_notification %>
 <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<div class="form-inputs">
+<div class="form-inputs product-form">
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :price %>
@@ -12,7 +12,7 @@
   <!-- End of Addition -->
   <br><%= f.input :photo, :multiple => true %>
 </div>
-<div class="form-actions">
+<div class="form-actions product-form">
   <%= f.button :submit, class: "btn btn-primary" %>
 </div>
 <% end %>
