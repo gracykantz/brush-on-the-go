@@ -1,38 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<div class="banner" style=" background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url( <%= image_path 'banner.jpg' %>);">
-  <h1>Toothbrushes in your Area</h1>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <span class="image one" />
+      <h1>Brush on the Go</h1>
+    </div>
+    <div class="carousel-item">
+      <span class="image two" />
+      <h1>Brush on the Go</h1>
+    </div>
+    <div class="carousel-item">
+      <span class="image three" />
+      <h1>Brush on the Go</h1>
+    </div>
+  </div>
 </div>
 
+<!-- Add Filters for Products - Added by Shalini -->
+<form class="form-inline search-bar">
+  <div class="form-group mb-2">
+    <%= form_tag products_path, method: :get do %>
+    <%= text_field_tag :query,
+    params[:query],
+    class: "form-control ",
+      placeholder: "Search for a Toothbrush"%>
+    </div>
+    <% end %>
+  </form>
+  <!-- End of Filter Addition -->
 <div
 id="map"
 data-markers="<%= @markers.to_json %>"
 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 ></div>
 
-<!-- Add Filters for Products - Added by Shalini -->
-<form class="form-inline">
-  <div class="form-group mb-2">
-    <%= form_tag products_path, method: :get do %>
-    <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-      placeholder: "Toothbrush Anywhere"%>
-    </div>
-    <button type="submit" class="btn btn-secondary mb-2">Search</button>
-    <% end %>
-  </form>
-  <!-- End of Filter Addition -->
 
   <% @products.each do |product| %>
   <div class="toothbrush-card">
     <div class="background-toothbrush" style="background-image: url(<%= cl_image_path product.photo %>)"></div>
       <h1><i class="far fa-heart heart-icon"></i></h1>
-    </div>
-    <%= link_to product do%>
+      <%= link_to product do%>
     <%#= cl_image_tag image.photo, height: 300, width: 400, crop: :fill  %>
     <h6><%= product.title %></h6>
-    <p> <%= product.price %>SEK per night</p>
+    <p> <%= product.price %> SEK per night</p>
     <div>
     <% product.rating.times do %>
       <i class="fas fa-star stars"></i>
@@ -42,6 +53,8 @@ data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
   </div>
   <% end %>
   <% end %>
+  </div>
+
 
   <br>
   <div id="space-for-navbar"></div>

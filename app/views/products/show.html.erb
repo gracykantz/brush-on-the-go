@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 <div class="toothbrush-content">
   <%= cl_image_tag @product.photo, height: 400, width: 380, crop: :fill, class: "toothbrush-photo"  %>
-  <h5><%= @product.title %></h5>
 
-
-  <p class="toothbrush-description"> <%= @product.description %> </p>
-  <% @rating.times do %>
-  <i class="fas fa-star stars"></i>
-  <% end %>
-
-  <p><%= @product.price %> SEK per night</p>
-
+  <div class="toothbrush-desc-stars-price">
+    <h5><%= @product.title %></h5>
+    <p class="toothbrush-description"> <%= @product.description %> </p>
+    <% @rating.times do %>
+    <i class="fas fa-star stars"></i>
+    <% end %>
+    <p><%= @product.price %> SEK per night</p>
+  </div>
+</div>
   <%= link_to new_product_booking_path(@product) do  %>
-  <p class="btn btn-primary booking-button">Book This Toothbrush</p>
+    <p class="btn btn-primary booking-button">Book This Toothbrush</p>
   <% end %>
 
   <div
@@ -21,9 +21,9 @@
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 <div>
+  <h4 class="review-title">Reviews</h4>
+  <button id="add-your-review" class="btn btn-primary add-review-button"><i class="fas fa-plus"></i> Add Your Review</button>
 
-  <h4>Reviews</h4>
-  <button id="add-your-review" class="btn btn-primary"><i class="fas fa-plus"></i> Add Your Review</button>
   <div class="review-form">
     <%= simple_form_for @review do |f| %>
     <%= f.input :product_id, as: :hidden %>
@@ -33,27 +33,24 @@
     <% end %>
   </div>
   <br>
-  <% @reviews.each do |review| %>
-  <div class="review-content pl-2 pt-2">
-    <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %> <strong><%= review.user.name %></strong>.
-    <br>
-      <% @reviews.each do |review| %>
+    <% @reviews.each do |review| %>
     <div class="review-content pl-4 pt-2">
-      <%= cl_image_tag review.user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
+      <%= cl_image_tag review.user.photo, width: 1700, height: 1700,:crop=>"crop", :gravity=>"face", class: "avatar mr-2" %> <strong class="mr-2"><%= review.user.name%></strong>
       <% review.rating.times do %>
       <i class="fas fa-star stars"></i>
       <% end %>
       <br>
       <div class="review-text pt-3">
         <%= review.content %>
-      <br>
+        <br>
       </div>
       <br>
     </div>
     <br>
   </div>
-  <% end %>
-</div>
+<% end %>
+
+
 
 <%= link_to products_path do %>
 <i class="fas fa-chevron-left back-button"></i>
