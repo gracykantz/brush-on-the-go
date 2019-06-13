@@ -1,59 +1,57 @@
 <p id="notice"><%= notice %></p>
 <div class="toothbrush-content">
-<%= cl_image_tag @images.photo, height: 400, width: 380, crop: :fill, class: "toothbrush-photo"  %>
- <h5><%= @product.title %></h5>
+  <%= cl_image_tag @product.photo, height: 400, width: 380, crop: :fill, class: "toothbrush-photo"  %>
+  <h5><%= @product.title %></h5>
 
 
-<p class="toothbrush-description"> <%= @product.description %> </p>
-<% @rating.times do %>
+  <p class="toothbrush-description"> <%= @product.description %> </p>
+  <% @rating.times do %>
   <i class="fas fa-star stars"></i>
-<% end %>
+  <% end %>
 
-<p><%= @product.price %> SEK per night</p>
+  <p><%= @product.price %> SEK per night</p>
 
-<%= link_to new_product_booking_path(@product) do  %>
-<p class="btn btn-primary booking-button">Book This Toothbrush</p>
-<% end %>
+  <%= link_to new_product_booking_path(@product) do  %>
+  <p class="btn btn-primary booking-button">Book This Toothbrush</p>
+  <% end %>
 
-<div
+  <div
   id="map"
   data-markers="<%= @markers.to_json %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 <div>
-  <p>
 
-  </p>
   <h4>Reviews</h4>
-      <button id="add-your-review" class="btn btn-primary"><i class="fas fa-plus"></i> Add Your Review</button>
-      <div class="review-form">
-        <%= simple_form_for @review do |f| %>
-          <%= f.input :product_id, as: :hidden %>
-          <%= f.input :content, as: :text, label: "Write your review" %>
-          <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "stars"%>
-          <%= f.submit "Submit", class: "btn btn-primary"%>
-      <% end %>
-      </div>
+  <button id="add-your-review" class="btn btn-primary"><i class="fas fa-plus"></i> Add Your Review</button>
+  <div class="review-form">
+    <%= simple_form_for @review do |f| %>
+    <%= f.input :product_id, as: :hidden %>
+    <%= f.input :content, as: :text, label: "Write your review" %>
+    <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "stars"%>
+    <%= f.submit "Submit", class: "btn btn-primary"%>
+    <% end %>
+  </div>
+  <br>
+  <% @reviews.each do |review| %>
+  <div class="review-content pl-2 pt-2">
+    <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %> <strong><%= review.user.name %></strong>.
     <br>
-      <% @reviews.each do |review| %>
-    <div class="review-content pl-2 pt-2">
-      <%= cl_image_tag current_user.photo, width: 1200, height: 1200,:crop=>"crop", :gravity=>"face", class: "avatar" %> <strong><%= review.user.name %></strong>.
-      <br>
-      <% review.rating.times do %>
-      <i class="fas fa-star stars"></i>
-      <% end %>
-      <br>
-      <div class="review-text">
-        <%= review.content %>
-      <br>
-      </div>
+    <% review.rating.times do %>
+    <i class="fas fa-star stars"></i>
+    <% end %>
+    <br>
+    <div class="review-text">
+      <%= review.content %>
       <br>
     </div>
-      <% end %>
+    <br>
+  </div>
+  <% end %>
 </div>
 
- <%= link_to products_path do %>
- <i class="fas fa-chevron-left back-button"></i>
- <% end %>
+<%= link_to products_path do %>
+<i class="fas fa-chevron-left back-button"></i>
+<% end %>
 
 <div id="space-for-navbar"></div>

@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all.order(rating: :desc)
     @booking = Booking.all
-    @images = Image.all
+    # @images = Image.all
     @currentuser = current_user
     @products_mark = Product.where.not(latitude: nil, longitude: nil)
     prod_marks = @products_mark
@@ -24,6 +24,35 @@ class ProductsController < ApplicationController
     create_markers(prod_marks)
   end
 
+  # GET /products/new
+  def new
+    @product = Product.new
+    @image = Image.new
+  end
+
+  # POST /products
+  # POST /products.json
+  def create
+    @product = Product.new(product_params)
+    @product.user_id = current_user.id
+    @product.save!
+    # @image = Image.create!(product_id: @product.id, user_id: current_user.id, photo: @product.remote_photo_url)
+    # respond_to do |format|
+    #   if @product.save
+    #     format.html { redirect_to @product, notice: 'Product was successfully created.' }
+    #     format.json { render :show, status: :created, location: @product }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    if @product.save
+      redirect_to product_path(@product)
+    else
+      render 'new'
+    end
+  end
+
   def create_markers(productsmark)
     @markers = productsmark.map do |product|
       {
@@ -39,6 +68,7 @@ class ProductsController < ApplicationController
   def show
     @booking = Booking.find_by_product_id(params[:id])
     @images = Image.find_by_product_id(params[:id])
+    @product = Product.find(params[:id])
     @reviews = Review.where("product_id = ?", params[:id])
     @products_mark = Product.where("id = ?", params[:id]).where.not(latitude: nil, longitude: nil)
     create_markers(@products_mark)
@@ -54,35 +84,8 @@ class ProductsController < ApplicationController
     @review = @product.reviews.build
   end
 
-  # GET /products/new
-  def new
-    @product = Product.new
-    @image = Image.new
-  end
-
   # GET /products/1/edit
   def edit
-  end
-
-  # POST /products
-  # POST /products.json
-  def create
-    @product = Product.new(product_params)
-    @product.save!
-    @image = Image.new(image_params)
-    @image.product_id = @product.id
-
-    @image.photo = params[:photo]
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /products/1
@@ -111,6 +114,13 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
 
+  def myproducts
+    @products_mark = []
+    @products = Product.where("user_id = ?", current_user.id)
+    @products_mark = Product.where("user_id = ?", current_user.id).where.not(latitude: nil, longitude: nil)
+    create_markers(@products_mark)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_product
@@ -119,14 +129,10 @@ class ProductsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def product_params
-    params.require(:product).permit(:name, :description, :price, :location, :photo)
+    params.require(:product).permit(:title, :description, :price, :location, :photo, user_id: current_user.id)
   end
 
   def review_params
     params.require(:review).permit(:content, :rating, :product_id)
-  end
-
-  def image_params
-    params.require(:image).permit(:product_id, :photo)
   end
 end

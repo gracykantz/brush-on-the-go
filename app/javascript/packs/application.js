@@ -6,6 +6,7 @@ import { showOnclick } from '../plugins/show_onclick';
 
 showOnclick();
 
+
 import { initStarRating } from '../plugins/init_star_rating';
 
 initStarRating();
