@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   def new
     @product = Product.find(params[:product_id])
-    @image = Image.find_by_product_id(params[:product_id])
+    # @image = Image.find_by_product_id(params[:product_id])
     @booking = Booking.new
   end
 
